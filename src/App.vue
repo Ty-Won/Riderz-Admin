@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+   <navbar></navbar>
     <img src="./assets/logo.png">
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
@@ -17,17 +18,26 @@
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
     </ul>
   </div>
+
+  
 </template>
 
 <script>
+import navbar from './components/navbar.vue'
+
 export default {
   name: 'app',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App',
+      tests:"jjojojoj"
     }
+  },
+  components: {
+    navbar
   }
 }
+
 </script>
 
 <style>
@@ -37,7 +47,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 
 h1, h2 {

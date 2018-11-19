@@ -1,8 +1,29 @@
 <template>
   <div id="app">
-   <navbar></navbar>
+      <b-navbar class="nav-color" toggleable="md" type="dark">
+
+          <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
+
+          <b-navbar-brand href="#">Riderz</b-navbar-brand>
+
+          <b-collapse is-nav id="nav_collapse">
+
+              <b-navbar-nav>
+                  <b-nav-item href="#">Status List</b-nav-item>
+                  <b-nav-item href="#">Ranking Board</b-nav-item>
+              </b-navbar-nav>
+
+              <!-- Right aligned nav items -->
+              <b-navbar-nav class="ml-auto">
+                      <b-nav-item v-show="isLoggedIn" href="#">Profile</b-nav-item>
+                      <b-nav-item @click="isLoggedIn = false" v-show="isLoggedIn" href="#">Signout</b-nav-item>
+                      <b-nav-item @click="isLoggedIn = true" v-show="!isLoggedIn" href="#">Login</b-nav-item>
+              </b-navbar-nav>
+
+          </b-collapse>
+      </b-navbar>
     <img src="./assets/logo.png">
-    <h1>{{ msg }}</h1>
+    <h1>{{ isLoggedIn }}</h1>
     <h2>Essential Links</h2>
     <ul>
       <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
@@ -30,11 +51,10 @@ export default {
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
-      tests:"jjojojoj"
+      tests:"jjojojoj",
+      isLoggedIn: false,
+      count: 0
     }
-  },
-  components: {
-    navbar
   }
 }
 
@@ -65,5 +85,9 @@ li {
 
 a {
   color: #42b983;
+}
+
+.nav-color {
+    background-color: blue;
 }
 </style>

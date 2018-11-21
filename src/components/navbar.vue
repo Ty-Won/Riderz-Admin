@@ -20,7 +20,7 @@
       <b-nav-item-dropdown right>
         <!-- Using button-content slot -->
         <template slot="button-content">
-          <em>User</em>
+          <em>{{User}}</em>
         </template>
         <b-dropdown-item href="#">Profile</b-dropdown-item>
         <b-dropdown-item href="#">Signout</b-dropdown-item>
@@ -31,6 +31,18 @@
 </b-navbar>
 
 </template>
+
+
+
+<script>
+  export default {
+    name:'navbar',
+    props:{
+      User:String
+    }
+  }
+
+</script>
 
 
 <style>

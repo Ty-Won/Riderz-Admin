@@ -41,10 +41,10 @@
     }
 	
 	function fetchPerformance() {
-
+		//fetch the data from the input
         var timeStart = document.getElementById('startTimeStamp').value;
         var timeEnd = document.getElementById('endTimeStamp').value;
-        
+        //check if anything is entered
         if(timeStart == '' || timeEnd == ''){
             timeStart = '1600-01-01';
             timeEnd = '2400-01-01';
@@ -64,6 +64,7 @@
 
 					// document.getElementById('driverPerformance').innerHTML += 
                     // 	element['username'] + ' ' + element['tripCount'] + '<br>'
+					// we want to have alternating white and grey background
                     count++;
                     if(count % 2 == 0){
                         string = string + '<tr> <td>' + element['username'] + '</td> <td>' + element['tripCount'] + '</td> </tr>'
@@ -82,7 +83,7 @@
 					.get('https://riderz-t10.herokuapp.com/users/getUserPerformance',
 				        {params: {startingTime: timeStart, endingTime: timeEnd}})
 					.then((response) => {
-                        var string = '<table cellpadding = 10 border = 1 align = "center" > <tr> <td> <b> UserName </b> </td> <td> <b> Number of Trips Completed </b> </td> </tr> ';
+                        var string = '<table cellpadding = 10 border = 1 align = "center" > <tr> <td> <b> Passenger </b> </td> <td> <b> Number of Trips Completed </b> </td> </tr> ';
                         var data = response.data
                         var count = 0;
 						data.forEach(function(element) {

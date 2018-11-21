@@ -1,6 +1,5 @@
 <template>
     <div id="statuslist">
-        <img src="../assets/logo.png">
         <h1>{{ msg }}</h1>
     </div>
 </template>

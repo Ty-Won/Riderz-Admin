@@ -11,7 +11,6 @@
 
                 <!-- Right aligned nav items -->
                 <b-navbar-nav class="ml-auto">
-                    <b-nav-item v-show="isLoggedIn" href="#/profile">Profile</b-nav-item>
                     <b-nav-item @click="isLoggedIn = false" v-show="isLoggedIn" href="#/">Signout</b-nav-item>
                     <b-nav-item @click="isLoggedIn = true" v-show="!isLoggedIn" href="#/login">Login</b-nav-item>
                 </b-navbar-nav>
@@ -49,6 +48,7 @@ export default {
 
 h1, h2 {
   font-weight: normal;
+  padding: 15px 0px;
 }
 
 ul {

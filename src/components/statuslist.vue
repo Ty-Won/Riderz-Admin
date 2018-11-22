@@ -5,13 +5,13 @@
 		<b-button variant="primary" @click="filterByDriverWrapper()">Drivers</b-button>
 		<b-button variant="primary" @click="filterByRouteWrapper()">Routes</b-button>
 		<h2 id="title">{{ title }}</h2>
-		<h5 id="subTitle">{{ subTitle }}</h5>
-		<h6 id="filterIndication">{{ filterIndication }}</h6>
+		<h5 id="subTitle">{{  }}</h5>
+		<h6 id="filterIndication">{{  }}</h6>
 		<b-input-group class="limited_size">
 			<b-form-input id="searchBox"></b-form-input>
 		</b-input-group>
 		<div id="results" style="text-align:center;margin:0 auto;"></div>
-		<h5 id="loadWarning">{{ loadWarning }}</h5>
+		<h5 id="loadWarning">{{  }}</h5>
     </div>
 </template>
 

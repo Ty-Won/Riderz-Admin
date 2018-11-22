@@ -1,7 +1,6 @@
 <template>
     <div id="statuslist"  style="align:center">
         <h1>{{ msg }}</h1>
-		<div id="table"></div>
 		<b-button variant="primary" @click="filterByUserWrapper()">Users</b-button>
 		<b-button variant="primary" @click="filterByDriverWrapper()">Drivers</b-button>
 		<b-button variant="primary" @click="filterByRouteWrapper()">Routes</b-button>
@@ -111,7 +110,7 @@
 								}
 								
 								// Fetches all routes and insert them into routesHash
-								axios
+								/*axios
 									.get('https://riderz-t10.herokuapp.com/getAllActiveItineraries')
 									.then((response) => {
 										var data = response.data
@@ -159,7 +158,7 @@
 										console.log(driversHash)
 										console.log(passengersArray)
 										console.log(routesArray)
-									})
+									})*/
 									
 							})
 					})
@@ -212,7 +211,7 @@
 		
 		table.appendChild(row1);
 		placeHolder.appendChild(table);
-	
+		
 	// Stores active username -> [lastLoginTime, firstName, lastName, email, phone]
 		for (var key in usersHash) {
 			
@@ -243,7 +242,9 @@
 				rowX.appendChild(phone);
 				table.appendChild(rowX);
 			}
-		}		
+		}
+		var x = document.getElementById('table').getElementsByTagName('td');
+		x[0].style.backgroundColor = 'yellow';		
 	}
 	
 	// TODO

@@ -169,7 +169,6 @@
 			})
 	}
 	
-	// TODO
 	function filterByUser() {
 	
 		// Show important information when Users button is clicked
@@ -191,18 +190,21 @@
 		
 		var cell1 = document.createElement('td');
 		cell1.innerHTML = "User name"
+		cell1.style.backgroundColor = "#d9d9d9"
 		
 		var cell2 = document.createElement('td');
 		cell2.innerHTML = "First Name"
 		
 		var cell3 = document.createElement('td');
 		cell3.innerHTML = "Last Name"
+		cell3.style.backgroundColor = "#d9d9d9"
 		
 		var cell4 = document.createElement('td');
 		cell4.innerHTML = "Email"
 		
 		var cell5 = document.createElement('td');
 		cell5.innerHTML = "Phone"
+		cell5.style.backgroundColor = "#d9d9d9"
 		
 		row1.appendChild(cell1);
 		row1.appendChild(cell2);
@@ -222,18 +224,21 @@
 		
 			var userName = document.createElement('td');
 			userName.innerHTML = key;
+			userName.style.backgroundColor = "#d9d9d9"
 			
 			var firstName = document.createElement('td');
 			firstName.innerHTML = values[1];
 			
 			var lastName = document.createElement('td');
 			lastName.innerHTML = values[2];
+			lastName.style.backgroundColor = "#d9d9d9"
 			
 			var email = document.createElement('td');
 			email.innerHTML = values[3];
 			
 			var phone = document.createElement('td');
 			phone.innerHTML = values[4];
+			phone.style.backgroundColor = "#d9d9d9"
 			
 			if(key.toUpperCase().indexOf(textToSearch.toUpperCase()) > -1){
 				rowX.appendChild(userName);
@@ -243,12 +248,9 @@
 				rowX.appendChild(phone);
 				table.appendChild(rowX);
 			}
-		}
-		var x = document.getElementById('table').getElementsByTagName('td');
-		x[0].style.backgroundColor = 'yellow';		
+		}		
 	}
 	
-	// TODO
 	function filterByDriver() {
 		// Provide web user important information of the current web page
 		document.getElementById('title').innerHTML = 'Drivers'
@@ -270,16 +272,19 @@
 		// Establish the columns layout for row 1
 		var table = document.createElement('table');
 		table.style.margin = 'auto'
+		//document.getElementsById('table')
 		var row1 = document.createElement('tr');
 		
 		var cell1 = document.createElement('td');
 		cell1.innerHTML = "Operator"
+		cell1.style.backgroundColor = "#d9d9d9"
 		
 		var cell2 = document.createElement('td');
 		cell2.innerHTML = "Rating"
 		
 		var cell3 = document.createElement('td');
 		cell3.innerHTML = "Number of Persons Who Rated"
+		cell3.style.backgroundColor = "#d9d9d9"
 		
 		var cell4 = document.createElement('td');
 		cell4.innerHTML = "Number of Trips Completed"
@@ -301,12 +306,14 @@
 		
 			var operator = document.createElement('td');
 			operator.innerHTML = key;
+			operator.style.backgroundColor = "#d9d9d9"
 			
 			var rating = document.createElement('td');
 			rating.innerHTML = values[0];
 			
 			var personsRated = document.createElement('td');
 			personsRated.innerHTML = values[1];
+			personsRated.style.backgroundColor = "#d9d9d9"
 			
 			var tripsCompleted = document.createElement('td');
 			tripsCompleted.innerHTML = values[2];
@@ -322,7 +329,6 @@
 		}
 	}
 	
-	// TODO
 	function filterByRoute() {
 		document.getElementById('title').innerHTML = 'Routes'
 		document.getElementById('subTitle').innerHTML = 'Filter End Location'
@@ -342,6 +348,7 @@
 		
 		var cell1 = document.createElement('td');
 		cell1.innerHTML = "TripID"
+		cell1.style.backgroundColor = "#d9d9d9"
 		
 		var cell2 = document.createElement('td');
 		cell2.innerHTML = "Starting Address"
@@ -349,11 +356,15 @@
 		var cell3 = document.createElement('td');
 		cell3.innerHTML = "Starting Time"
 		
+		cell3.style.backgroundColor = "#d9d9d9"
+		
 		var cell4 = document.createElement('td');
 		cell4.innerHTML = "End Address"
 		
 		var cell5 = document.createElement('td');
 		cell5.innerHTML = "End Time"
+		
+		cell5.style.backgroundColor = "#d9d9d9"
 		
 		row1.appendChild(cell1);
 		row1.appendChild(cell2);
@@ -371,18 +382,21 @@
 			
 			var tripID = document.createElement('td');
 			tripID.innerHTML = routesArray[i][0];
+			tripID.style.backgroundColor = "#d9d9d9"
 		
 			var startTime = document.createElement('td');
 			startTime.innerHTML = routesArray[i][1];
 			
 			var startAddr = document.createElement('td');
 			startAddr.innerHTML = routesArray[i][2]
+			startAddr.style.backgroundColor = "#d9d9d9"
 			
 			var endTime = document.createElement('td')
 			endTime.innerHTML = routesArray[i][3]
 			
 			var endAddr = document.createElement('td')
 			endAddr.innerHTML = routesArray[i][4]
+			endAddr.style.backgroundColor = "#d9d9d9"
 			
 			// Filter operators in the search box
 			if(routesArray[i][4].toUpperCase().indexOf(textToSearch.toUpperCase()) > -1){

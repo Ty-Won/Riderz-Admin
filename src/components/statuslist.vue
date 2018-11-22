@@ -185,6 +185,7 @@
 		placeHolder.innerHTML = "";
 		
 		var table = document.createElement('table');
+		table.style.margin = 'auto' 
 		
 		var row1 = document.createElement('tr');
 		
@@ -268,6 +269,7 @@
 		
 		// Establish the columns layout for row 1
 		var table = document.createElement('table');
+		table.style.margin = 'auto'
 		var row1 = document.createElement('tr');
 		
 		var cell1 = document.createElement('td');
@@ -335,6 +337,7 @@
 		
 		// Establish the columns layout for row 1
 		var table = document.createElement('table');
+		table.style.margin = 'auto'
 		var row1 = document.createElement('tr');
 		
 		var cell1 = document.createElement('td');

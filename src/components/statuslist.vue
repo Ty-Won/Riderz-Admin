@@ -11,7 +11,7 @@
 		<b-input-group class="limited_size">
 			<b-form-input id="searchBox"></b-form-input>
 		</b-input-group>
-		<div id="results" style="align:center;margin-left:325px;"></div>
+		<div id="results" style="align:center;margin-left:125px;"></div>
     </div>
 </template>
 
@@ -36,11 +36,6 @@
 			filterByRouteWrapper() {
 				filterByRoute()
 			}
-			/*
-			searchFilter() {
-				listChecker()
-			}
-			*/
 		},
 		mounted () {
 			fetchActive()
@@ -58,7 +53,7 @@
 	// Stores active passengers -> [username]
 	var passengersArray = []
 	
-	// Stores active routes = [[tripID, startingAddress, startingTime, endingAddress, endingTime]]
+	// Stores active routes = [[tripID, startingTime,startingAddress,  endingTime, endingAddress, ]]
 	var routesArray = []
 	
 	/**
@@ -103,7 +98,7 @@
 						}
 						
 						// Fetches all routes and insert them into routesHash
-						/*axios
+						axios
 							.get('https://riderz-t10.herokuapp.com/getAllActiveItineraries')
 							.then((response) => {
 								var data = response.data
@@ -149,7 +144,7 @@
 								console.log(driversHash)
 								console.log(passengersArray)
 								console.log(routesArray)
-							})*/
+							})
 							
 					})
 			})
@@ -312,6 +307,77 @@
 		document.getElementById('title').innerHTML = 'Routes'
 		document.getElementById('subTitle').innerHTML = 'Filter End Location'
 		document.getElementById('filterIndication').innerHTML = '(Click again on Routes to apply filter)'
+		// Obtain information from the text box (filter)
+		var textToSearch = document.getElementById('searchBox').value;
+
+		// Create Table
+		var placeHolder = document.getElementById('results');
+		// Reset table when button click (to not generate multiple tables)
+		placeHolder.innerHTML = "";
+		
+		// Establish the columns layout for row 1
+		var table = document.createElement('table');
+		var row1 = document.createElement('tr');
+		
+		var cell1 = document.createElement('td');
+		cell1.innerHTML = "TripID"
+		
+		var cell2 = document.createElement('td');
+		cell2.innerHTML = "Starting Address"
+		
+		var cell3 = document.createElement('td');
+		cell3.innerHTML = "Starting Time"
+		
+		var cell4 = document.createElement('td');
+		cell4.innerHTML = "End Address"
+		
+		var cell5 = document.createElement('td');
+		cell5.innerHTML = "End Time"
+		
+		row1.appendChild(cell1);
+		row1.appendChild(cell2);
+		row1.appendChild(cell3);
+		row1.appendChild(cell4);
+		row1.appendChild(cell5);
+		
+		table.appendChild(row1);
+		placeHolder.appendChild(table);
+		
+		var counter = 0;
+		
+		// Fill in the table
+		for (var i =0; i < routesArray.length; i++) {
+			
+			var rowX = document.createElement('tr');
+			
+			counter ++;
+			
+			var tripID = document.createElement('td');
+			tripID.innerHTML = counter;
+			//tripID.innerHTML = routesArray[i][0];
+		
+			var startTime = document.createElement('td');
+			startTime.innerHTML = routesArray[i][1];
+			
+			var startAddr = document.createElement('td');
+			startAddr.innerHTML = routesArray[i][2];
+			
+			var endTime = document.createElement('td');
+			endTime.innerHTML = routesArray[i][3];
+			
+			var endAddr = document.createElement('td');
+			endAddr.innerHTML = routesArray[i][4];
+			
+			// Filter operators in the search box
+			if(routesArray[i][4].toUpperCase().indexOf(textToSearch.toUpperCase()) > -1){
+				rowX.appendChild(tripID);
+				rowX.appendChild(startAddr);
+				rowX.appendChild(startTime);
+				rowX.appendChild(endAddr);
+				rowX.appendChild(endTime);
+				table.appendChild(rowX);
+			}
+		}
 	}
 </script>
 

@@ -110,7 +110,7 @@
 								}
 								
 								// Fetches all routes and insert them into routesHash
-								/*axios
+								axios
 									.get('https://riderz-t10.herokuapp.com/getAllActiveItineraries')
 									.then((response) => {
 										var data = response.data
@@ -158,7 +158,7 @@
 										console.log(driversHash)
 										console.log(passengersArray)
 										console.log(routesArray)
-									})*/
+									})
 									
 							})
 					})
@@ -176,21 +176,20 @@
 		document.getElementById('subTitle').innerHTML = 'Filter User Name'
 		document.getElementById('filterIndication').innerHTML = '(Click again on Users to apply filter)'
 		var textToSearch = document.getElementById('searchBox').value;
-		
-		var array_keys = new Array();
-		var array_values = new Array();
 
 		var placeHolder = document.getElementById('results');
 		placeHolder.innerHTML = "";
 		
 		var table = document.createElement('table');
 		table.style.margin = 'auto' 
+		table.cellPadding = "10";
 		
 		var row1 = document.createElement('tr');
 		
 		var cell1 = document.createElement('td');
 		cell1.innerHTML = "User name"
 		cell1.style.backgroundColor = "#d9d9d9"
+		
 		
 		var cell2 = document.createElement('td');
 		cell2.innerHTML = "First Name"
@@ -260,10 +259,6 @@
 		// Obtain information from the text box (filter)
 		var textToSearch = document.getElementById('searchBox').value;
 
-		// Initialize variable to deal with hash/array
-		var array_keys = new Array();
-		var array_values = new Array();
-
 		// Create Table
 		var placeHolder = document.getElementById('results');
 		// Reset table when button click (to not generate multiple tables)
@@ -272,7 +267,8 @@
 		// Establish the columns layout for row 1
 		var table = document.createElement('table');
 		table.style.margin = 'auto'
-		//document.getElementsById('table')
+		table.cellPadding = "10";
+		
 		var row1 = document.createElement('tr');
 		
 		var cell1 = document.createElement('td');
@@ -331,7 +327,7 @@
 	
 	function filterByRoute() {
 		document.getElementById('title').innerHTML = 'Routes'
-		document.getElementById('subTitle').innerHTML = 'Filter End Location'
+		document.getElementById('subTitle').innerHTML = 'Filter End Address'
 		document.getElementById('filterIndication').innerHTML = '(Click again on Routes to apply filter)'
 		// Obtain information from the text box (filter)
 		var textToSearch = document.getElementById('searchBox').value;
@@ -344,6 +340,8 @@
 		// Establish the columns layout for row 1
 		var table = document.createElement('table');
 		table.style.margin = 'auto'
+		table.cellPadding = "10";
+		
 		var row1 = document.createElement('tr');
 		
 		var cell1 = document.createElement('td');
@@ -383,20 +381,21 @@
 			var tripID = document.createElement('td');
 			tripID.innerHTML = routesArray[i][0];
 			tripID.style.backgroundColor = "#d9d9d9"
-		
-			var startTime = document.createElement('td');
-			startTime.innerHTML = routesArray[i][1];
 			
 			var startAddr = document.createElement('td');
 			startAddr.innerHTML = routesArray[i][2]
-			startAddr.style.backgroundColor = "#d9d9d9"
 			
-			var endTime = document.createElement('td')
-			endTime.innerHTML = routesArray[i][3]
+			
+			var startTime = document.createElement('td');
+			startTime.innerHTML = routesArray[i][1];
+			startTime.style.backgroundColor = "#d9d9d9"
 			
 			var endAddr = document.createElement('td')
 			endAddr.innerHTML = routesArray[i][4]
-			endAddr.style.backgroundColor = "#d9d9d9"
+			
+			var endTime = document.createElement('td')
+			endTime.innerHTML = routesArray[i][3]
+			endTime.style.backgroundColor = "#d9d9d9"
 			
 			// Filter operators in the search box
 			if(routesArray[i][4].toUpperCase().indexOf(textToSearch.toUpperCase()) > -1){

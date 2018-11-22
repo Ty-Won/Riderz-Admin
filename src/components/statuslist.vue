@@ -11,7 +11,7 @@
 		<b-input-group class="limited_size">
 			<b-form-input id="searchBox"></b-form-input>
 		</b-input-group>
-		<div id="results" style="align:center;margin-left:125px;"></div>
+		<div id="results" style="text-align:center;margin:0 auto;"></div>
     </div>
 </template>
 
@@ -193,16 +193,16 @@
 		cell1.innerHTML = "User name"
 		
 		var cell2 = document.createElement('td');
-		cell2.innerHTML = "Email"
+		cell2.innerHTML = "First Name"
 		
 		var cell3 = document.createElement('td');
-		cell3.innerHTML = "Phone"
+		cell3.innerHTML = "Last Name"
 		
 		var cell4 = document.createElement('td');
-		cell4.innerHTML = "First Name"
+		cell4.innerHTML = "Email"
 		
 		var cell5 = document.createElement('td');
-		cell5.innerHTML = "Last Name"
+		cell5.innerHTML = "Phone"
 		
 		row1.appendChild(cell1);
 		row1.appendChild(cell2);
@@ -213,34 +213,35 @@
 		table.appendChild(row1);
 		placeHolder.appendChild(table);
 	
-		for (var key in driversHash) {
+	// Stores active username -> [lastLoginTime, firstName, lastName, email, phone]
+		for (var key in usersHash) {
 			
-			var values = driversHash[key];
+			var values = usersHash[key];
 			
-			var rower1 = document.createElement('tr');
+			var rowX = document.createElement('tr');
 		
-			var col1 = document.createElement('td');
-			col1.innerHTML = key;
+			var userName = document.createElement('td');
+			userName.innerHTML = key;
 			
-			var col2 = document.createElement('td');
-			col2.innerHTML = values[0];
+			var firstName = document.createElement('td');
+			firstName.innerHTML = values[1];
 			
-			var col3 = document.createElement('td');
-			col3.innerHTML = values[1];
+			var lastName = document.createElement('td');
+			lastName.innerHTML = values[2];
 			
-			var col4 = document.createElement('td');
-			col4.innerHTML = values[2];
+			var email = document.createElement('td');
+			email.innerHTML = values[3];
 			
-			var col5 = document.createElement('td');
-			col5.innerHTML = "value ... ";
+			var phone = document.createElement('td');
+			phone.innerHTML = values[4];
 			
 			if(key.toUpperCase().indexOf(textToSearch.toUpperCase()) > -1){
-				rower1.appendChild(col1);
-				rower1.appendChild(col2);
-				rower1.appendChild(col3);
-				rower1.appendChild(col4);
-				rower1.appendChild(col5);
-				table.appendChild(rower1);
+				rowX.appendChild(userName);
+				rowX.appendChild(firstName);
+				rowX.appendChild(lastName);
+				rowX.appendChild(email);
+				rowX.appendChild(phone);
+				table.appendChild(rowX);
 			}
 		}		
 	}
@@ -269,13 +270,13 @@
 		var row1 = document.createElement('tr');
 		
 		var cell1 = document.createElement('td');
-		cell1.innerHTML = "Operator |"
+		cell1.innerHTML = "Operator"
 		
 		var cell2 = document.createElement('td');
-		cell2.innerHTML = "Rating |"
+		cell2.innerHTML = "Rating"
 		
 		var cell3 = document.createElement('td');
-		cell3.innerHTML = "Number of Persons Who Rated |"
+		cell3.innerHTML = "Number of Persons Who Rated"
 		
 		var cell4 = document.createElement('td');
 		cell4.innerHTML = "Number of Trips Completed"

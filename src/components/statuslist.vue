@@ -11,6 +11,7 @@
 			<b-form-input id="searchBox"></b-form-input>
 		</b-input-group>
 		<div id="results" style="text-align:center;margin:0 auto;"></div>
+		<h5 id="loadWarning">{{ loadWarning }}</h5>
     </div>
 </template>
 
@@ -171,25 +172,36 @@
 	
 	function filterByUser() {
 	
-		// Show important information when Users button is clicked
+		// Provide web user important information of the current web page
 		document.getElementById('title').innerHTML = 'Users'
 		document.getElementById('subTitle').innerHTML = 'Filter User Name'
 		document.getElementById('filterIndication').innerHTML = '(Click again on Users to apply filter)'
+		
+		// Obtain information from the text box (filter)
 		var textToSearch = document.getElementById('searchBox').value;
 
+		// Create Table
 		var placeHolder = document.getElementById('results');
-		placeHolder.innerHTML = "";
 		
+		// Instantiate warning message in case data did not fully uploaded yet
+		var warningField = document.getElementById('loadWarning');
+		warningField.style.padding = "40px";
+		
+		// Clear necessary fields
+		placeHolder.innerHTML = "";
+		warningField.innerHTML = "";
+		
+		// Table format
 		var table = document.createElement('table');
 		table.style.margin = 'auto' 
 		table.cellPadding = "10";
 		
+		// Establish the columns layout for row 1
 		var row1 = document.createElement('tr');
 		
 		var cell1 = document.createElement('td');
 		cell1.innerHTML = "User name"
 		cell1.style.backgroundColor = "#d9d9d9"
-		
 		
 		var cell2 = document.createElement('td');
 		cell2.innerHTML = "First Name"
@@ -214,40 +226,45 @@
 		table.appendChild(row1);
 		placeHolder.appendChild(table);
 		
-	// Stores active username -> [lastLoginTime, firstName, lastName, email, phone]
-		for (var key in usersHash) {
+		// Warn web users in case the content was not fully uploaded
+		if(Object.keys(usersHash).length == 0){
+			warningField.innerHTML = 'Content did not yet fully uploaded, Click again on Users'
+		}else{
+			// Fill table
+			for (var key in usersHash) {
+				
+				var values = usersHash[key];
+				
+				var rowX = document.createElement('tr');
 			
-			var values = usersHash[key];
-			
-			var rowX = document.createElement('tr');
-		
-			var userName = document.createElement('td');
-			userName.innerHTML = key;
-			userName.style.backgroundColor = "#d9d9d9"
-			
-			var firstName = document.createElement('td');
-			firstName.innerHTML = values[1];
-			
-			var lastName = document.createElement('td');
-			lastName.innerHTML = values[2];
-			lastName.style.backgroundColor = "#d9d9d9"
-			
-			var email = document.createElement('td');
-			email.innerHTML = values[3];
-			
-			var phone = document.createElement('td');
-			phone.innerHTML = values[4];
-			phone.style.backgroundColor = "#d9d9d9"
-			
-			if(key.toUpperCase().indexOf(textToSearch.toUpperCase()) > -1){
-				rowX.appendChild(userName);
-				rowX.appendChild(firstName);
-				rowX.appendChild(lastName);
-				rowX.appendChild(email);
-				rowX.appendChild(phone);
-				table.appendChild(rowX);
-			}
-		}		
+				var userName = document.createElement('td');
+				userName.innerHTML = key;
+				userName.style.backgroundColor = "#d9d9d9"
+				
+				var firstName = document.createElement('td');
+				firstName.innerHTML = values[1];
+				
+				var lastName = document.createElement('td');
+				lastName.innerHTML = values[2];
+				lastName.style.backgroundColor = "#d9d9d9"
+				
+				var email = document.createElement('td');
+				email.innerHTML = values[3];
+				
+				var phone = document.createElement('td');
+				phone.innerHTML = values[4];
+				phone.style.backgroundColor = "#d9d9d9"
+				
+				if(key.toUpperCase().indexOf(textToSearch.toUpperCase()) > -1){
+					rowX.appendChild(userName);
+					rowX.appendChild(firstName);
+					rowX.appendChild(lastName);
+					rowX.appendChild(email);
+					rowX.appendChild(phone);
+					table.appendChild(rowX);
+				}
+			}	
+		}			
 	}
 	
 	function filterByDriver() {
@@ -261,14 +278,21 @@
 
 		// Create Table
 		var placeHolder = document.getElementById('results');
-		// Reset table when button click (to not generate multiple tables)
-		placeHolder.innerHTML = "";
 		
-		// Establish the columns layout for row 1
+		// Instantiate warning message in case data did not fully uploaded yet
+		var warningField = document.getElementById('loadWarning');
+		warningField.style.padding = "40px";
+		
+		// Clear necessary fields
+		placeHolder.innerHTML = "";
+		warningField.innerHTML = "";
+		
+		// Table format
 		var table = document.createElement('table');
 		table.style.margin = 'auto'
 		table.cellPadding = "10";
 		
+		// Establish the columns layout for row 1
 		var row1 = document.createElement('tr');
 		
 		var cell1 = document.createElement('td');
@@ -293,55 +317,69 @@
 		table.appendChild(row1);
 		placeHolder.appendChild(table);
 		
-		// Fill in the table
-		for (var key in driversHash) {
+		// Warn web users in case the content was not fully uploaded
+		if(Object.keys(driversHash).length == 0){
+			warningField.innerHTML = 'Content did not yet fully uploaded, Click again on Drivers'
+		}else{
+			// Fill in the table
+			for (var key in driversHash) {
+				
+				var values = driversHash[key];
+				
+				var rowX = document.createElement('tr');
 			
-			var values = driversHash[key];
-			
-			var rowX = document.createElement('tr');
-		
-			var operator = document.createElement('td');
-			operator.innerHTML = key;
-			operator.style.backgroundColor = "#d9d9d9"
-			
-			var rating = document.createElement('td');
-			rating.innerHTML = values[0];
-			
-			var personsRated = document.createElement('td');
-			personsRated.innerHTML = values[1];
-			personsRated.style.backgroundColor = "#d9d9d9"
-			
-			var tripsCompleted = document.createElement('td');
-			tripsCompleted.innerHTML = values[2];
-			
-			// Filter operators in the search box
-			if(key.toUpperCase().indexOf(textToSearch.toUpperCase()) > -1){
-				rowX.appendChild(operator);
-				rowX.appendChild(rating);
-				rowX.appendChild(personsRated);
-				rowX.appendChild(tripsCompleted);
-				table.appendChild(rowX);
+				var operator = document.createElement('td');
+				operator.innerHTML = key;
+				operator.style.backgroundColor = "#d9d9d9"
+				
+				var rating = document.createElement('td');
+				rating.innerHTML = values[0];
+				
+				var personsRated = document.createElement('td');
+				personsRated.innerHTML = values[1];
+				personsRated.style.backgroundColor = "#d9d9d9"
+				
+				var tripsCompleted = document.createElement('td');
+				tripsCompleted.innerHTML = values[2];
+				
+				// Filter operators in the search box
+				if(key.toUpperCase().indexOf(textToSearch.toUpperCase()) > -1){
+					rowX.appendChild(operator);
+					rowX.appendChild(rating);
+					rowX.appendChild(personsRated);
+					rowX.appendChild(tripsCompleted);
+					table.appendChild(rowX);
+				}	
 			}
 		}
 	}
 	
 	function filterByRoute() {
+		// Provide web user important information of the current web page
 		document.getElementById('title').innerHTML = 'Routes'
 		document.getElementById('subTitle').innerHTML = 'Filter End Address'
 		document.getElementById('filterIndication').innerHTML = '(Click again on Routes to apply filter)'
+		
 		// Obtain information from the text box (filter)
 		var textToSearch = document.getElementById('searchBox').value;
 
 		// Create Table
 		var placeHolder = document.getElementById('results');
-		// Reset table when button click (to not generate multiple tables)
-		placeHolder.innerHTML = "";
 		
-		// Establish the columns layout for row 1
+		// Instantiate warning message in case data did not fully uploaded yet
+		var warningField = document.getElementById('loadWarning');
+		warningField.style.padding = "40px";
+		
+		// Clear necessary fields
+		placeHolder.innerHTML = "";
+		warningField.innerHTML = "";
+		
+		// Table format
 		var table = document.createElement('table');
 		table.style.margin = 'auto'
 		table.cellPadding = "10";
 		
+		// Establish the columns layout for row 1
 		var row1 = document.createElement('tr');
 		
 		var cell1 = document.createElement('td');
@@ -373,38 +411,44 @@
 		table.appendChild(row1);
 		placeHolder.appendChild(table);
 		
-		// Fill in the table
-		for (var i = 0; i < routesArray.length; i++) {
-			console.log(i)
-			var rowX = document.createElement('tr');
-			
-			var tripID = document.createElement('td');
-			tripID.innerHTML = routesArray[i][0];
-			tripID.style.backgroundColor = "#d9d9d9"
-			
-			var startAddr = document.createElement('td');
-			startAddr.innerHTML = routesArray[i][2]
-			
-			
-			var startTime = document.createElement('td');
-			startTime.innerHTML = routesArray[i][1];
-			startTime.style.backgroundColor = "#d9d9d9"
-			
-			var endAddr = document.createElement('td')
-			endAddr.innerHTML = routesArray[i][4]
-			
-			var endTime = document.createElement('td')
-			endTime.innerHTML = routesArray[i][3]
-			endTime.style.backgroundColor = "#d9d9d9"
-			
-			// Filter operators in the search box
-			if(routesArray[i][4].toUpperCase().indexOf(textToSearch.toUpperCase()) > -1){
-				rowX.appendChild(tripID);
-				rowX.appendChild(startAddr);
-				rowX.appendChild(startTime);
-				rowX.appendChild(endAddr);
-				rowX.appendChild(endTime);
-				table.appendChild(rowX);
+		// Warn web users in case the content was not fully uploaded
+		if( routesArray.length == 0){
+			warningField.innerHTML = 'Content did not yet fully uploaded, Click again on Routes'
+		
+		}else{
+			// Fill in the table
+			for (var i = 0; i < routesArray.length; i++) {
+				console.log(i)
+				var rowX = document.createElement('tr');
+				
+				var tripID = document.createElement('td');
+				tripID.innerHTML = routesArray[i][0];
+				tripID.style.backgroundColor = "#d9d9d9"
+				
+				var startAddr = document.createElement('td');
+				startAddr.innerHTML = routesArray[i][2]
+				
+				
+				var startTime = document.createElement('td');
+				startTime.innerHTML = routesArray[i][1];
+				startTime.style.backgroundColor = "#d9d9d9"
+				
+				var endAddr = document.createElement('td')
+				endAddr.innerHTML = routesArray[i][4]
+				
+				var endTime = document.createElement('td')
+				endTime.innerHTML = routesArray[i][3]
+				endTime.style.backgroundColor = "#d9d9d9"
+				
+				// Filter operators in the search box
+				if(routesArray[i][4].toUpperCase().indexOf(textToSearch.toUpperCase()) > -1){
+					rowX.appendChild(tripID);
+					rowX.appendChild(startAddr);
+					rowX.appendChild(startTime);
+					rowX.appendChild(endAddr);
+					rowX.appendChild(endTime);
+					table.appendChild(rowX);
+				}
 			}
 		}
 	}

@@ -44,7 +44,7 @@
 	
 	var mode = "none"
 
-	// Stores active username -> lastLoginTime pair
+	// Stores active username -> [lastLoginTime, firstName, lastName, email, phone]
 	var usersHash = {}
 
 	// Stores active drivers -> [rating, personsRated, tripsCompleted] 
@@ -69,83 +69,99 @@
 				data.forEach(function(element) {
 					// Only store into usersHash if the user is active
 					if (element['active'] == true) {
-						usersHash[element['username']] = element['sessionTime']
+						usersHash[element['username']] = [element['sessionTime']]
 					}
 				})
 				
-				// Fetches all drivers and insert them into driversHash
-				// Then insert
+				// Obtains user information and push relevant information into usersHash if they are active
 				axios
-					.get('https://riderz-t10.herokuapp.com/driver/all')
+					.get('https://riderz-t10.herokuapp.com/users/getAllUsers', {params: {username: '123'}})
 					.then((response) => {
 						var data = response.data
-						// Insert all active drivers into driversHash
 						data.forEach(function(element) {
-							if (usersHash[element['operator']]) {
-								driversHash[element['operator']] = 
-									[element['rating'], 
-									 element['personsRated'],
-									 element['tripsCompleted']]
+							if (usersHash[element['username']]) {
+								usersHash[element['username']].push(element['firstName'])
+								usersHash[element['username']].push(element['lastName'])
+								usersHash[element['username']].push(element['email'])
+								usersHash[element['username']].push(element['phone'])
 							}
 						})
-						
-						// For keys in usersHash not found in driversHash
-						// Insert them into passengersHash
-						for (var key in usersHash) {
-							if (!driversHash[key]) {
-								passengersArray.push(key)
-							}
-						}
-						
-						// Fetches all routes and insert them into routesHash
+					
+						// Fetches all drivers and insert them into driversHash
 						axios
-							.get('https://riderz-t10.herokuapp.com/getAllActiveItineraries')
+							.get('https://riderz-t10.herokuapp.com/driver/all')
 							.then((response) => {
 								var data = response.data
-								// Insert all active routes into routesHash
+								// Insert all active drivers into driversHash
 								data.forEach(function(element) {
-									var tripID = element['tripID']
-									var startingLongitude = element['startingLongitude']
-									var startingLatitude = element['startingLatitude']
-									var startingTime = element['startingTime']
-									var endingLongitude = element['endingLongitude']
-									var endingLatitude = element['enedingLatitude']
-									var endingTime = element['endingTime']
-									
-									const GMAPS_URL = 'https://maps.googleapis.com/maps/api/geocode/json?'
-									const API_KEY = '&key=AIzaSyARBA8OOAyllhaTKzyroPqIJW8I47b7Nv8'
-									
-									// Build 2 URL to call to perform reverse geocoding
-									var startingURL = GMAPS_URL + 'latlng=' + startingLatitude 
-														+ ',' + startingLongitude + API_KEY
-									var endingURL = GMAPS_URL + 'latlng=' + endingLongitude
-														+ ',' + endingLongitude + API_KEY
-									console.log(startingURL)
-									console.log(endingURL)
-									
-									// New array to store into routesArray
-									var insert = [tripID, startingTime, 2, endingTime, 4]
-									
-									// Perform reverse geocoding using Google Maps API
-									axios
-										.get(startingURL)
-										.then((response) => {
-											insert[2] = response.data.results[0].formatted_address
+									if (usersHash[element['operator']]) {
+										driversHash[element['operator']] = 
+											[element['rating'], 
+											 element['personsRated'],
+											 element['tripsCompleted']]
+									}
+								})
+								
+								// For keys in usersHash not found in driversHash
+								// Insert them into passengersHash
+								for (var key in usersHash) {
+									if (!driversHash[key]) {
+										passengersArray.push(key)
+									}
+								}
+								
+								// Fetches all routes and insert them into routesHash
+								axios
+									.get('https://riderz-t10.herokuapp.com/getAllActiveItineraries')
+									.then((response) => {
+										var data = response.data
+										// Insert all active routes into routesHash
+										data.forEach(function(element) {
+											var tripID = element['tripID']
+											var startingLongitude = element['startingLongitude']
+											var startingLatitude = element['startingLatitude']
+											var startingTime = element['startingTime']
+											var endingLongitude = element['endingLongitude']
+											var endingLatitude = element['endingLatitude']
+											var endingTime = element['endingTime']
+											
+											const GMAPS_URL = 'https://maps.googleapis.com/maps/api/geocode/json?'
+											const API_KEY = '&key=AIzaSyARBA8OOAyllhaTKzyroPqIJW8I47b7Nv8'
+											
+											// Build 2 URL to call to perform reverse geocoding
+											var startingURL = GMAPS_URL + 'latlng=' + startingLatitude 
+																+ ',' + startingLongitude + API_KEY
+											var endingURL = GMAPS_URL + 'latlng=' + endingLatitude
+																+ ',' + endingLongitude + API_KEY
+											
+											// New array to store into routesArray
+											var insert = [tripID, startingTime, 2, endingTime, 4]
+											
+											// Perform reverse geocoding using Google Maps API
 											axios
-												.get(endingURL)
+												.get(startingURL)
 												.then((response) => {
-													// Pushes the array of information on an active route into routesArray
-													insert[4] = response.data.results[0].formatted_address
-													routesArray.push(insert)
+													insert[2] = response.data.results[0].formatted_address
+													axios
+														.get(endingURL)
+														.then((response) => {
+															// Pushes the array of information on an active route into routesArray
+															try {
+																insert[4] = response.data.results[0].formatted_address
+																routesArray.push(insert)
+															} catch (err) {
+																console.error(endingURL + " reverse geolocation failed to return a valid address")
+															}
+														})
 												})
 										})
-								})
-								console.log(usersHash)
-								console.log(driversHash)
-								console.log(passengersArray)
-								console.log(routesArray)
+										console.log(usersHash)
+										console.log(driversHash)
+										console.log(passengersArray)
+										console.log(routesArray)
+									})
+									
 							})
-							
 					})
 			})
 			.catch((error) => {
@@ -343,30 +359,25 @@
 		table.appendChild(row1);
 		placeHolder.appendChild(table);
 		
-		var counter = 0;
-		
 		// Fill in the table
-		for (var i =0; i < routesArray.length; i++) {
-			
+		for (var i = 0; i < routesArray.length; i++) {
+			console.log(i)
 			var rowX = document.createElement('tr');
 			
-			counter ++;
-			
 			var tripID = document.createElement('td');
-			tripID.innerHTML = counter;
-			//tripID.innerHTML = routesArray[i][0];
+			tripID.innerHTML = routesArray[i][0];
 		
 			var startTime = document.createElement('td');
 			startTime.innerHTML = routesArray[i][1];
 			
 			var startAddr = document.createElement('td');
-			startAddr.innerHTML = routesArray[i][2];
+			startAddr.innerHTML = routesArray[i][2]
 			
-			var endTime = document.createElement('td');
-			endTime.innerHTML = routesArray[i][3];
+			var endTime = document.createElement('td')
+			endTime.innerHTML = routesArray[i][3]
 			
-			var endAddr = document.createElement('td');
-			endAddr.innerHTML = routesArray[i][4];
+			var endAddr = document.createElement('td')
+			endAddr.innerHTML = routesArray[i][4]
 			
 			// Filter operators in the search box
 			if(routesArray[i][4].toUpperCase().indexOf(textToSearch.toUpperCase()) > -1){

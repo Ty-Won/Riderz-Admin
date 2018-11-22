@@ -202,20 +202,25 @@
 		var cell1 = document.createElement('td');
 		cell1.innerHTML = "User name"
 		cell1.style.backgroundColor = "#d9d9d9"
+		cell1.style.fontWeight = 'bold';
 		
 		var cell2 = document.createElement('td');
 		cell2.innerHTML = "First Name"
+		cell2.style.fontWeight = 'bold';
 		
 		var cell3 = document.createElement('td');
 		cell3.innerHTML = "Last Name"
 		cell3.style.backgroundColor = "#d9d9d9"
+		cell3.style.fontWeight = 'bold';
 		
 		var cell4 = document.createElement('td');
 		cell4.innerHTML = "Email"
+		cell4.style.fontWeight = 'bold';
 		
 		var cell5 = document.createElement('td');
 		cell5.innerHTML = "Phone"
 		cell5.style.backgroundColor = "#d9d9d9"
+		cell5.style.fontWeight = 'bold';
 		
 		row1.appendChild(cell1);
 		row1.appendChild(cell2);
@@ -298,16 +303,20 @@
 		var cell1 = document.createElement('td');
 		cell1.innerHTML = "Operator"
 		cell1.style.backgroundColor = "#d9d9d9"
+		cell1.style.fontWeight = 'bold';
 		
 		var cell2 = document.createElement('td');
 		cell2.innerHTML = "Rating"
+		cell2.style.fontWeight = 'bold';
 		
 		var cell3 = document.createElement('td');
 		cell3.innerHTML = "Number of Persons Who Rated"
 		cell3.style.backgroundColor = "#d9d9d9"
+		cell3.style.fontWeight = 'bold';
 		
 		var cell4 = document.createElement('td');
 		cell4.innerHTML = "Number of Trips Completed"
+		cell4.style.fontWeight = 'bold';
 		
 		row1.appendChild(cell1);
 		row1.appendChild(cell2);
@@ -385,22 +394,25 @@
 		var cell1 = document.createElement('td');
 		cell1.innerHTML = "TripID"
 		cell1.style.backgroundColor = "#d9d9d9"
+		cell1.style.fontWeight = 'bold';
 		
 		var cell2 = document.createElement('td');
 		cell2.innerHTML = "Starting Address"
+		cell2.style.fontWeight = 'bold';
 		
 		var cell3 = document.createElement('td');
 		cell3.innerHTML = "Starting Time"
-		
 		cell3.style.backgroundColor = "#d9d9d9"
+		cell3.style.fontWeight = 'bold';
 		
 		var cell4 = document.createElement('td');
 		cell4.innerHTML = "End Address"
+		cell4.style.fontWeight = 'bold';
 		
 		var cell5 = document.createElement('td');
 		cell5.innerHTML = "End Time"
-		
 		cell5.style.backgroundColor = "#d9d9d9"
+		cell5.style.fontWeight = 'bold';
 		
 		row1.appendChild(cell1);
 		row1.appendChild(cell2);

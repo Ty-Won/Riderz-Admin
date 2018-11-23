@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="app">
 
     <!--if navbar is not signed in, no profile button-->
    <navbar signedIn=False></navbar>
@@ -7,7 +7,7 @@
    <b-container>
 
     <b-jumbotron header="Riderz" lead="Ride Sharing App">
-      <p>Ride Sharing Admin</p>
+      <p>Admin</p>
       <signInModal align-v="center" v-bind:title="modal_title" v-bind:modalButtonTitle="modalButtonTitle" >
       </signInModal>
     </b-jumbotron>
@@ -51,8 +51,6 @@
 
 
    </b-container>
-   
-
   </div>
   
 </template>
@@ -82,5 +80,3 @@ export default {
 };
 </script>
 
-<style>
-</style>

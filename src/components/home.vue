@@ -10,7 +10,7 @@
         name: "home",
         data () {
             return {
-                msg: 'Home'
+                msg: 'Welcome to Rider-z Admin Panel'
             }
         }
     }

@@ -11,13 +11,13 @@
 
                 <!-- Right aligned nav items -->
                 <b-navbar-nav class="ml-auto">
-                    <b-nav-item v-show="isLoggedIn" href="#/profile">Profile</b-nav-item>
                     <b-nav-item @click="isLoggedIn = false" v-show="isLoggedIn" href="#/">Signout</b-nav-item>
                     <b-nav-item @click="isLoggedIn = true" v-show="!isLoggedIn" href="#/login">Login</b-nav-item>
                 </b-navbar-nav>
             </b-collapse>
         </b-navbar>
         <router-view></router-view>
+        <link rel="stylesheet" type="text/css" href="./stylesheet.css">
     </div>
 </template>
 
@@ -38,34 +38,3 @@ export default {
 
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
-
-.nav-color {
-    background-color: blue;
-}
-</style>

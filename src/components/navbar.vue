@@ -33,6 +33,6 @@
 
 <style>
 .nav-color {
-  background-color: blue;
+  background-color: #2b3a41;
 }
 </style>

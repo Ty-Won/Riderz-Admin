@@ -60,7 +60,6 @@
 <script>
 import navbar from "./components/navbar.vue";
 import signInModal from "./components/modal.vue";
-import signForm from "./components/form.vue";
 import axios from "axios";
 
 export default {
@@ -78,7 +77,6 @@ export default {
   components: {
     navbar,
     signInModal,
-    signForm
 
   }
 };

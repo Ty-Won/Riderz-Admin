@@ -14,7 +14,8 @@
                                 type="text"
                                 v-model="form.username"
                                 required 
-                                placeholder="Enter Username">
+                                placeholder="Enter Username"
+                                ref="username">
                 </b-form-input>
             </b-form-group>   
 
@@ -25,7 +26,8 @@
                                 type="password"
                                 v-model="form.password"
                                 required 
-                                placeholder="Password">
+                                placeholder="Password"
+                                ref="password">
                 </b-form-input>
             </b-form-group>
 
@@ -62,12 +64,16 @@ export default {
   methods: {
     login(evt) {
       evt.preventDefault();
-      axios
-        .post("https://riderz-t10.herokuapp.com/login", {
-          username: "Marlon",
-          password: "Bernardes"
+      var bodyFormData = new FormData();
+      bodyFormData.set("username", this.$refs.username.value);
+      bodyFormData.set("password", this.$refs.username.value);
+
+        axios({
+            method: 'post',
+            url: "https://riderz-t10.herokuapp.com/login",
+            data: bodyFormData
         })
-        .then(response => console.log(response))
+        .then(response => this.$router.push("/profile"))
         .catch(e => {
           console.log("LOL");
         });

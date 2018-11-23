@@ -5,7 +5,8 @@ import RankingBoard from '../components/rankingboard.vue'
 import StatusList from '../components/statuslist.vue'
 import Home from '../components/home.vue'
 
-Vue.use(Router)
+
+Vue.use(Router);
 
 export default new Router({
     routes: [

@@ -17,6 +17,7 @@
             </b-collapse>
         </b-navbar>
         <router-view></router-view>
+        <link rel="stylesheet" type="text/css" href="./stylesheet.css">
     </div>
 </template>
 
@@ -37,35 +38,3 @@ export default {
 
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-h1, h2 {
-  font-weight: normal;
-  padding: 15px 0px;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
-
-.nav-color {
-    background-color: blue;
-}
-</style>

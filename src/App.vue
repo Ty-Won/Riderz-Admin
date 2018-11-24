@@ -1,63 +1,20 @@
 <template>
-  <div id="app" class="app">
+    <div id="app">
 
-    <!--if navbar is not signed in, no profile button-->
-   <navbar signedIn=False></navbar>
-
-   <b-container>
-
-    <b-jumbotron header="Riderz" lead="Ride Sharing App">
-      <p>Admin</p>
-      <signInModal align-v="center" v-bind:title="modal_title" v-bind:modalButtonTitle="modalButtonTitle" >
-      </signInModal>
-    </b-jumbotron>
-
-    <!-- <bModal id="signInModal" centered align-v="center" title="hello">
-    <div>
-      <b-form @submit="login"> 
-
-            <b-form-group   id="usernameInputGroup"
-                            label="Username">
-
-                <b-form-input id="usernameInput"
-                                type="text"
-                                v-model="form.username"
-                                required 
-                                placeholder="Enter Username"
-                                ref="signInUser">
-                </b-form-input>
-            </b-form-group>   
-
-
-            <b-form-group>
-                <b-form-input id="password"
-                                type="password"
-                                v-model="form.password"
-                                label="Password"
-                                required 
-                                placeholder="Password"
-                                ref="signInPass">
-                </b-form-input>
-            </b-form-group>
-
-      <b-button type="submit" variant="primary">Submit</b-button>
-      <b-button type="reset" variant="danger">Reset</b-button>
-
-      </b-form>
+        <mainNavbar></mainNavbar>
+        <router-view></router-view>
+        <pageFooter></pageFooter>
+        <link rel="stylesheet" type="text/css" href="./stylesheet.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     </div>
-    
-    </bModal> -->
 
 
-
-   </b-container>
-  </div>
-  
 </template>
 
 <script>
-import navbar from "./components/navbar.vue";
-import signInModal from "./components/modal.vue";
+import mainNavbar from "./components/navbar.vue";
+import signInModal from "./components/signInModal.vue";
+import pageFooter from "./components/footer.vue";
 import axios from "axios";
 
 export default {
@@ -68,13 +25,18 @@ export default {
        username: "",
        password: ""
        },
-        modal_title:"Sign In",
-      modalButtonTitle:"Sign In"
+      modal_title:"Sign In",
+      modalButtonTitle:"Sign In",
     };
   },
+  props: {
+      isSignedIn:false
+
+  },
   components: {
-    navbar,
+    mainNavbar,
     signInModal,
+    pageFooter
 
   }
 };

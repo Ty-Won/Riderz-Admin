@@ -1,6 +1,5 @@
 <template>
     <div>
-
         <b-btn v-b-modal.modal_component_container>{{modalButtonTitle}}</b-btn>
 
         <b-modal id="modal_component_container" v-bind:title="modal_title">
@@ -33,9 +32,6 @@
 
 
                     <b-button type="submit" variant="primary">Submit</b-button>
-                    <b-button type="reset" variant="danger">Reset</b-button>
-
-
 
                 </b-form>
             </div>
@@ -46,6 +42,7 @@
 
 <script>
 import axios from "axios";
+import {serverBus} from "../main";
 
 export default {
   name: "signInModal",
@@ -68,18 +65,23 @@ export default {
       bodyFormData.set("username", this.$refs.username.value);
       bodyFormData.set("password", this.$refs.username.value);
 
-        axios({
-            method: 'post',
-            url: "https://riderz-t10.herokuapp.com/login",
-            data: bodyFormData
-        })
-        .then(response => this.$router.push("/profile"))
+      axios({
+        method: "post",
+        url: "https://riderz-t10.herokuapp.com/login",
+        data: bodyFormData
+      })
+        .then(response => signInRedirect(this))
         .catch(e => {
-          console.log("LOL");
+          console.log(e);
         });
     }
   }
 };
+
+function signInRedirect(currentObject) {
+  serverBus.$emit("signIn");
+  currentObject.$router.push("/ranking_board");
+}
 </script>
 
 <style>

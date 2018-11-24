@@ -70,7 +70,11 @@ export default {
         url: "https://riderz-t10.herokuapp.com/login",
         data: bodyFormData
       })
-        .then(response => signInRedirect(this))
+        .then(function(response) {
+          if(response.data != "This combination does not exist!"){
+            signInRedirect(this);
+          }
+        })
         .catch(e => {
           console.log(e);
         });

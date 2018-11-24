@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b-btn v-b-modal.modal_component_container>{{modalButtonTitle}}</b-btn>
+        <b-btn class="mt-3" v-b-modal.modal_component_container>{{modalButtonTitle}}</b-btn>
 
         <b-modal id="modal_component_container" v-bind:title="modal_title">
                 <div>
@@ -79,9 +79,8 @@ export default {
 };
 
 function signInRedirect(currentObject) {
-  serverBus.$emit("signIn");
-  currentObject.$router.push("/ranking_board");
+    document.cookie = "isSignedIn=true";
+    serverBus.$emit("signIn");
+    currentObject.$router.push("/ranking_board");
 }
 </script>
-
-<style>

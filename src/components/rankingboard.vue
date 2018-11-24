@@ -35,7 +35,7 @@
 
 <script>
 	import axios from 'axios'
-	
+
     export default {
         name: "rankingboard",
         data () {
@@ -53,7 +53,11 @@
                 showDismissibleAlert: false,
                 warningMessage: ""
             }
-        }, 
+        }, created() {
+            if(!parseBool(get_cookie("isSignedIn"))){
+                this.$router.push("/");
+            }
+        },
         methods:{
             filterByDateWrapper(){
                 var timeStart = document.getElementById('startTimeStamp').value;
@@ -139,4 +143,23 @@
 				console.error(error)
 			})
 	}
+
+    function get_cookie ( cookie_name )
+    {
+        // https://www.thesitewizard.com/javascripts/cookies.shtml
+        var cookie_string = document.cookie ;
+        if (cookie_string.length != 0) {
+            var cookie_array = cookie_string.split( '; ' );
+            for (var i = 0 ; i < cookie_array.length ; i++) {
+                var cookie_value = cookie_array[i].match ( cookie_name + '=(.*)' );
+                if (cookie_value != null) {
+                    return decodeURIComponent ( cookie_value[1] ) ;
+                }
+            }
+        }
+        return '' ;
+    }
+
+    function parseBool(val) { return val === true || val === "true" }
+
 </script>

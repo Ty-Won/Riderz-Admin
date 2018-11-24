@@ -20,8 +20,7 @@ export default {
     };
   },
   components: {
-    signInModal,
-
+    signInModal
   }
 }
 

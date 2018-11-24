@@ -1,18 +1,26 @@
 <template>
-    <div id="statuslist"  style="align:center">
-        <h1>{{ msg }}</h1>
-		<b-button variant="primary" @click="filterByUserWrapper()">Users</b-button>
-		<b-button variant="primary" @click="filterByDriverWrapper()">Drivers</b-button>
-		<b-button variant="primary" @click="filterByRouteWrapper()">Routes</b-button>
-		<h2 id="title">{{ title }}</h2>
-		<h5 id="subTitle">{{ msg }}</h5>
-		<h6 id="filterIndication">{{ msg }}</h6>
-		<b-input-group class="limited_size">
-			<b-form-input id="searchBox"></b-form-input>
-		</b-input-group>
-		<div id="results" style="text-align:center;margin:0 auto;"></div>
-		<h5 id="loadWarning">{{ msg }}</h5>
-    </div>
+    <b-container id="statuslist" >
+		<b-row>
+			<b-col class="mx-auto">
+				<h1>{{ msg }}</h1>
+				<b-button @click="filterByUserWrapper()">Users</b-button>
+				<b-button @click="filterByDriverWrapper()">Drivers</b-button>
+				<b-button @click="filterByRouteWrapper()">Routes</b-button>
+			</b-col>
+		</b-row>
+       <b-row>
+		   <b-col>
+			   <h2 id="title">{{ title }}</h2>
+			   <h5 id="subTitle">{{ msg }}</h5>
+			   <h6 id="filterIndication">{{ msg }}</h6>
+			   <b-input-group class="limited_size">
+				   <b-form-input id="searchBox"></b-form-input>
+			   </b-input-group>
+			   <div id="results" class="mb-3"></div>
+			   <h5 id="loadWarning">{{ msg }}</h5>
+		   </b-col>
+	   </b-row>
+    </b-container>
 </template>
 
 <script>
@@ -36,7 +44,11 @@
 			filterByRouteWrapper() {
 				filterByRoute()
 			}
-		},
+		}, created() {
+			if(!parseBool(get_cookie("isSignedIn"))){
+				this.$router.push("/");
+			}
+        },
 		mounted () {
 			fetchActive()
 		}
@@ -464,6 +476,24 @@
 			}
 		}
 	}
+
+    function get_cookie ( cookie_name )
+    {
+        // https://www.thesitewizard.com/javascripts/cookies.shtml
+        var cookie_string = document.cookie ;
+        if (cookie_string.length != 0) {
+            var cookie_array = cookie_string.split( '; ' );
+            for (var i = 0 ; i < cookie_array.length ; i++) {
+                var cookie_value = cookie_array[i].match ( cookie_name + '=(.*)' );
+                if (cookie_value != null) {
+                    return decodeURIComponent ( cookie_value[1] ) ;
+                }
+            }
+        }
+        return '' ;
+    }
+
+    function parseBool(val) { return val === true || val === "true" }
 </script>
 
 <style scoped>

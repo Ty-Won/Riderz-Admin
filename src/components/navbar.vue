@@ -4,13 +4,13 @@
             <b-navbar-brand href="#">Riderz</b-navbar-brand>
             <b-collapse is-nav id="nav_collapse">
                 <b-navbar-nav>
-                    <b-nav-item v-show="isLoggedIn" href="#/status_list">Status List</b-nav-item>
-                    <b-nav-item v-show="isLoggedIn" href="#/ranking_board">Ranking Board</b-nav-item>
+                    <b-nav-item v-show="isSignedIn" href="#/status_list">Status List</b-nav-item>
+                    <b-nav-item v-show="isSignedIn" href="#/ranking_board">Ranking Board</b-nav-item>
                 </b-navbar-nav>
 
 
                 <b-navbar-nav class="ml-auto">
-                  <b-nav-item v-show="isLoggedIn" @click="logOut">Sign Out</b-nav-item>
+                  <b-nav-item v-show="isSignedIn" @click="logOut">Sign Out</b-nav-item>
                 </b-navbar-nav>
             </b-collapse>
         </b-navbar>
@@ -26,23 +26,23 @@ export default {
   name: "mainNavbar",
   data() {
     return {
-      isLoggedIn: false
+        isSignedIn: false
     };
   },
   created() {
     serverBus.$on("signIn", () => {
-      this.isLoggedIn = true;
+      this.isSignedIn = true;
     });
   },
   methods:{
     logOut(evt){
       this.$router.push("/");
-      this.isLoggedIn = false;
+      this.isSignedIn = false;
     }
   }
 };
-</script>
 
+</script>
 
 <style>
 .nav-color {

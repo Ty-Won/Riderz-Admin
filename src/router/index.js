@@ -23,6 +23,7 @@ export default new Router({
             path: '/status_list',
             name: 'StatusList',
             component: StatusList
-        }
+        },
+        { path: '*', redirect: "/"}
     ]
 })

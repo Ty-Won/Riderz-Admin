@@ -1,40 +1,44 @@
 <template>
     <div id="app">
-        <b-navbar class="nav-color" toggleable="md" type="dark">
-            <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
-            <b-navbar-brand href="#/">Riderz</b-navbar-brand>
-            <b-collapse is-nav id="nav_collapse">
-                <b-navbar-nav>
-                    <b-nav-item v-show="isLoggedIn" href="#/status_list">Status List</b-nav-item>
-                    <b-nav-item v-show="isLoggedIn" href="#/ranking_board">Ranking Board</b-nav-item>
-                </b-navbar-nav>
 
-                <!-- Right aligned nav items -->
-                <b-navbar-nav class="ml-auto">
-                    <b-nav-item @click="isLoggedIn = false" v-show="isLoggedIn" href="#/">Signout</b-nav-item>
-                    <b-nav-item @click="isLoggedIn = true" v-show="!isLoggedIn" href="#/login">Login</b-nav-item>
-                </b-navbar-nav>
-            </b-collapse>
-        </b-navbar>
+        <mainNavbar></mainNavbar>
         <router-view></router-view>
+        <pageFooter></pageFooter>
         <link rel="stylesheet" type="text/css" href="./stylesheet.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     </div>
+
+
 </template>
 
 <script>
-import navbar from './components/navbar.vue'
+import mainNavbar from "./components/navbar.vue";
+import signInModal from "./components/signInModal.vue";
+import pageFooter from "./components/footer.vue";
+import axios from "axios";
 
 export default {
-  name: 'app',
-  data () {
+  name: "app",
+  data() {
     return {
-      msg: 'Welcome to Your Vue.js App',
-      tests:"jjojojoj",
-      isLoggedIn: false,
-      count: 0
-    }
-  }
-}
+       form: {
+       username: "",
+       password: ""
+       },
+      modal_title:"Sign In",
+      modalButtonTitle:"Sign In",
+    };
+  },
+  props: {
+      isSignedIn:false
 
+  },
+  components: {
+    mainNavbar,
+    signInModal,
+    pageFooter
+
+  }
+};
 </script>
 

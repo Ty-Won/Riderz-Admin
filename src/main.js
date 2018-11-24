@@ -8,6 +8,8 @@ import "./stylesheet.css"
 
 Vue.use(BootstrapVue);
 
+export const serverBus = new Vue();
+
 new Vue({
   el: '#app',
   router,

@@ -1,21 +1,30 @@
 <template>
     <div id="home">
-        <img src="../assets/logo.png">
-        <h1>{{ msg }}</h1>
+    <b-jumbotron header="Riderz" lead="Ride Sharing App">
+      <img src="../assets/logo.png">
+      <signInModal align-v="center" v-bind:title="modal_title" v-bind:modalButtonTitle="modalButtonTitle" >
+      </signInModal>
+    </b-jumbotron>
     </div>
 </template>
 
 <script>
-    export default {
+import signInModal from "./signInModal.vue"
+export default {
         name: "home",
-        data () {
+        data() {
             return {
-                msg: 'Welcome to Rider-z Admin Panel'
-            }
-        }
-    }
+                msg: 'Welcome to Rider-z Admin Panel',
+                modal_title:"Sign In",
+                modalButtonTitle:"Sign In"
+    };
+  },
+  components: {
+    signInModal,
+
+  }
+}
+
+
+    
 </script>
-
-<style scoped>
-
-</style>
